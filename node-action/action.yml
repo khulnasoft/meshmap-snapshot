@@ -1,9 +1,9 @@
 name: 'run puppeteer to take screenshot'
 description: 'run puppeteer to take screenshot'
-author: Layer5
+author: KhulnaSoft
 inputs:
   authToken:  # id of input
-    description: 'Authentication token for Meshery Server'
+    description: 'Authentication token for Meshplay Server'
     required: true
     default: ""
 outputs:

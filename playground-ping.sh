@@ -2,7 +2,7 @@
 # returns true if the playground responds wit 200
 # else returns false
 
-PLAYGROUND_PING_URL=https://playground.meshery.io/api/system/version
+PLAYGROUND_PING_URL=https://playground.meshplay.khulnasoft.com/api/system/version
 export V=($(curl --silent  $PLAYGROUND_PING_URL  -w "%{http_code}" | grep 200))
 
 if [ ! -z "$V" ] && [ $V == 200 ]

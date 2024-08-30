@@ -12,19 +12,19 @@ jobs:
       - name: Checkout meshmap-snapshot code
         uses: actions/checkout@v4
         with:
-          repository: layer5labs/meshmap-snapshot
+          repository: khulnasoft/meshmap-snapshot
           fetch-depth: 1
           token: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: Update templates
         uses: fjogeleit/yaml-update-action@main
         with:
-          repository: layer5labs/meshmap-snapshot
+          repository: khulnasoft/meshmap-snapshot
           branch: master
           token: ${{ secrets.GH_ACCESS_TOKEN }}
           commitChange: true
-          message: Updated meshery-cloud version to ${{inputs.release-version}}
+          message: Updated meshplay-cloud version to ${{inputs.release-version}}
           commitUserName: l5io
-          commitUserEmail: l5io@layer5.io
+          commitUserEmail: l5io@khulnasoft.com
           changes: |
             {
               "workflow-templates/file-uploadTemplate.yaml": {

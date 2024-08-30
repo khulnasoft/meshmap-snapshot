@@ -62,11 +62,11 @@ fs.readdirSync(dirPath).forEach((fileName, index) => {
       );
     }
     const url =
-      "https://meshery.layer5.io/api/integrations/github/meta/artifacts";
+      "https://meshplay.khulnasoft.com/api/integrations/github/meta/artifacts";
 
     const headers = {
       "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${process.env.MESHERY_TOKEN}`,
+      Authorization: `Bearer ${process.env.MESHPLAY_TOKEN}`,
     };
 
     if (formData) {

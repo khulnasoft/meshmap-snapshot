@@ -28,7 +28,7 @@ const { designEndpoint } = require("./constants");
 
 Cypress.Commands.add("login", () => {
   const token = Cypress.env("token");
-  cy.setCookie("meshery-provider", "Meshery");
+  cy.setCookie("meshplay-provider", "Meshplay");
   cy.setCookie("token", token);
 });
 
@@ -44,7 +44,7 @@ Cypress.Commands.add("setReleaseTag", (version) => {
     data["package_version"] = version;
     data[
       "package_url"
-    ] = `https://github.com/layer5labs/meshery-extensions-packages/releases/download/${version}/provider-meshery.tar.gz`;
+    ] = `https://github.com/khulnasoft/meshplay-extensions-packages/releases/download/${version}/provider-meshplay.tar.gz`;
     cy.writeFile("cypress/fixtures/capabilities.json", JSON.stringify(data));
   });
 });

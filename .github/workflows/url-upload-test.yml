@@ -22,7 +22,7 @@ jobs:
         uses: ./action
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          mesheryToken: ${{ secrets.MESHERY_TOKEN }}
+          meshplayToken: ${{ secrets.MESHPLAY_TOKEN }}
           prNumber: ${{ env.PULL_NO }}
           application_type: "Helm Chart"
-          application_url: "https://github.com/meshery/meshery.io/raw/master/charts/meshery-v0.6.86.tgz"
+          application_url: "https://github.com/meshplay/meshplay.khulnasoft.com/raw/master/charts/meshplay-v0.6.86.tgz"

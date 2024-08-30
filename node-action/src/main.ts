@@ -19,7 +19,7 @@ async function puppeteerBrowserHandler(authToken: string): Promise<void> {
   const page = await browser.newPage();
 
   const recorder = new PuppeteerScreenRecorder(page);
-  page.goto("https://playground.meshery.io");
+  page.goto("https://playground.meshplay.khulnasoft.com");
   // Set screen size
   await page.setViewport({ width: 1080, height: 1024 });
 

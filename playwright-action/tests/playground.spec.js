@@ -1,8 +1,8 @@
 const { test, expect } = require("@playwright/test");
 
 test("Login and logout test", async ({ page }) => {
-  await page.goto("https://meshery.layer5.io/login");
-  await page.locator('input[name="identifier"]').fill("test-admin@layer5.io");
+  await page.goto("https://meshplay.khulnasoft.com/login");
+  await page.locator('input[name="identifier"]').fill("test-admin@khulnasoft.com");
   await page.locator('input[name="identifier"]').press("Tab");
   await page.locator('input[name="password"]').fill("test-admin");
   await page.getByRole("button", { name: "Sign in", exact: true }).click();

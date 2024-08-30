@@ -16,7 +16,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.js')(on, config)
     },
-    baseUrl: 'https://playground.meshery.io',
+    baseUrl: 'https://playground.meshplay.khulnasoft.com',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
   },
   videoCompression: false

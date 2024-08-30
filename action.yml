@@ -1,6 +1,6 @@
 name: "MeshMap-Snapshot"
-description: "Walks in application and takes a shot of your infrastructure using Meshery Extension MeshMap"
-author: Layer5
+description: "Walks in application and takes a shot of your infrastructure using Meshplay Extension MeshMap"
+author: KhulnaSoft
 inputs:
   designID:
     description: "The design uuid, example: 3c116d0a-49ea-4294-addc-d9ab34210662"
@@ -11,8 +11,8 @@ inputs:
   githubToken:
     description: "Github PAT token"
     required: true
-  mesheryToken:
-    description: "Meshery Authentication Provider Token"
+  meshplayToken:
+    description: "Meshplay Authentication Provider Token"
     required: true
   prNumber:
     description: "The Pull request on which comment has to be made"
@@ -51,11 +51,11 @@ runs:
       shell: bash
     - name: set active cluster URL as playground
       if: ${{ steps.ping-playground.outputs.IS_PLAYGROUND_RUNNING }}
-      run: echo "MESHERY_URL=https://playground.meshery.io" >> $GITHUB_ENV
+      run: echo "MESHPLAY_URL=https://playground.meshplay.khulnasoft.com" >> $GITHUB_ENV
       shell: bash
     - name: set active cluster URL as localhost:9081
       if: ${{ !steps.ping-playground.outputs.IS_PLAYGROUND_RUNNING }}
-      run: echo "MESHERY_URL=http://127.0.0.1:9081" >> $GITHUB_ENV
+      run: echo "MESHPLAY_URL=http://127.0.0.1:9081" >> $GITHUB_ENV
       shell: bash
     - name: Create k8s Kind Cluster
       if: ${{ !steps.ping-playground.outputs.IS_PLAYGROUND_RUNNING }}
@@ -75,14 +75,14 @@ runs:
       shell: bash
     - run: |
         echo "Uploading using application file"
-        AppId=$(MESHERY_SERVER_BASE_URL="https://playground.meshery.io" UPLOAD_TYPE="${{inputs.application_type}}" MESHERY_TOKEN=${{ inputs.mesheryToken }}  ./action/uploadApplicationFile.sh)
+        AppId=$(MESHPLAY_SERVER_BASE_URL="https://playground.meshplay.khulnasoft.com" UPLOAD_TYPE="${{inputs.application_type}}" MESHPLAY_TOKEN=${{ inputs.meshplayToken }}  ./action/uploadApplicationFile.sh)
         AppId=$(echo "$AppId" | sed 's/"//g')
         echo "APPLICATION_ID=$AppId" >> $GITHUB_ENV
       if: ${{ inputs.filePath && !inputs.designID }}
       shell: bash
     - run: |
         echo "Uploading using application url"
-        AppId=$(MESHERY_SERVER_BASE_URL="https://playground.meshery.io" UPLOAD_TYPE="${{inputs.application_type}}" MESHERY_TOKEN=${{ inputs.mesheryToken }} UPLOAD_URL=${{ inputs.application_url }}  ./action/uploadApplicationUrl.sh)
+        AppId=$(MESHPLAY_SERVER_BASE_URL="https://playground.meshplay.khulnasoft.com" UPLOAD_TYPE="${{inputs.application_type}}" MESHPLAY_TOKEN=${{ inputs.meshplayToken }} UPLOAD_URL=${{ inputs.application_url }}  ./action/uploadApplicationUrl.sh)
         AppId=$(echo "$AppId" | sed 's/"//g')
         echo "APPLICATION_ID=$AppId" >> $GITHUB_ENV
       if: ${{ inputs.application_url && !inputs.designID }}
@@ -104,7 +104,7 @@ runs:
         # record: true
       env:
         GITHUB_TOKEN: ${{ inputs.githubToken }}
-        CYPRESS_token: ${{ inputs.mesheryToken }}
+        CYPRESS_token: ${{ inputs.meshplayToken }}
         CYPRESS_releasetag: ${{env.tag}}
         CYPRESS_applicationId: ${{ env.APPLICATION_ID }}
         # CYPRESS_RECORD_KEY: ${{ inputs.cypressRecordKey }}
@@ -131,7 +131,7 @@ runs:
       shell: bash
     - id: outputurl
       run: |
-        MESHERY_TOKEN=${{inputs.mesheryToken}} assetLocation=${{ inputs.assetLocation }} node node-file-upload/index.js > __fileResponse.txt  
+        MESHPLAY_TOKEN=${{inputs.meshplayToken}} assetLocation=${{ inputs.assetLocation }} node node-file-upload/index.js > __fileResponse.txt  
         outputstr=$(head -n 1  __fileResponse.txt)
         required_string="https"
         echo $outputstr
@@ -152,5 +152,5 @@ runs:
         repository: ${{github.repository}}
         number: ${{ inputs.prNumber }}
         id: meshmap-snapshot
-        message: '[<img src="${{env.RESOURCE_URL}}">](https://meshery.layer5.io/catalog/content/catalog/${{ env.APPLICATION_ID }}) _[Understanding Meshery Relationships](https://docs.layer5.io/meshmap/concepts/relationships/)_'
+        message: '[<img src="${{env.RESOURCE_URL}}">](https://meshplay.khulnasoft.com/catalog/content/catalog/${{ env.APPLICATION_ID }}) _[Understanding Meshplay Relationships](https://docs.khulnasoft.com/meshmap/concepts/relationships/)_'
         append: false
